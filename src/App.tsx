@@ -8,7 +8,11 @@ function App() {
     async function getServices() {
       const { data: services } = await supabase.from('services').select();
 
+      if (services === null) return;
+
       if (services.length > 1) {
+        console.log(services);
+
         setServices(services);
       }
     }
