@@ -1,4 +1,4 @@
-export interface Customer {
+export interface Mechanic {
   id: string;
   dni: string;
   name: string;
