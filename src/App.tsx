@@ -1,6 +1,7 @@
-import { NewServiceReceipt } from './pages/NewServiceReceipt';
+import { RouterProvider } from 'react-router';
+import { AppRouter } from './app.router';
 
 function App() {
-  return <NewServiceReceipt />;
+  return <RouterProvider router={AppRouter} />;
 }
 export default App;
