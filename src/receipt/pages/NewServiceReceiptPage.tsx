@@ -1,6 +1,6 @@
+import type { Customer, Mechanic, Service } from '@/interfaces';
+import { supabase } from '@/lib/supabase';
 import { useEffect, useRef, useState } from 'react';
-import { supabase } from '../../../lib/supabase';
-import type { Customer, Mechanic, Service } from '../../../interfaces';
 
 export const NewServiceReceiptPage = () => {
   const FUEL_LEVELS = ['E', '1/4', '1/2', '3/4', 'F'];
