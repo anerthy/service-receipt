@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router';
-import { ServiceReceiptPage } from './features/receipt/pages/ServiceReceiptPage';
-import { NewServiceReceiptPage } from './features/receipt/pages/NewServiceReceiptPage';
 import { lazy } from 'react';
+import { ServiceReceiptPage } from './receipt/pages/ServiceReceiptPage';
+import { NewServiceReceiptPage } from './receipt/pages/NewServiceReceiptPage';
 
-const MainLayout = lazy(() => import('./features/receipt/layouts/MainLayout'));
+const MainLayout = lazy(() => import('./receipt/layouts/MainLayout'));
 
 export const AppRouter = createBrowserRouter([
   {
