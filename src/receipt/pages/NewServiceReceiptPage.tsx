@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { MainLayout } from '../layouts/MainLayout';
-import { supabase } from '../lib/supabase';
-import type { Customer, Mechanic, Service } from '../interfaces';
+import { supabase } from '../../../lib/supabase';
+import type { Customer, Mechanic, Service } from '../../../interfaces';
 
-export const NewServiceReceipt = () => {
+export const NewServiceReceiptPage = () => {
   const FUEL_LEVELS = ['E', '1/4', '1/2', '3/4', 'F'];
 
   const [services, setServices] = useState<Service[]>([]);
@@ -25,7 +24,7 @@ export const NewServiceReceipt = () => {
 
     if (error || !data || data.length === 0) setCustomer({} as Customer);
 
-    setCustomer((data[0] as Customer) || ({} as Customer));
+    setCustomer((data![0] as Customer) || ({} as Customer));
   };
 
   useEffect(() => {
@@ -65,7 +64,7 @@ export const NewServiceReceipt = () => {
   }, []);
 
   return (
-    <MainLayout>
+    <>
       <div className="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden transition-colors duration-200">
         {/* <!-- Sticky Header --> */}
         <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#101822]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
@@ -399,6 +398,6 @@ export const NewServiceReceipt = () => {
           </div>
         </main>
       </div>
-    </MainLayout>
+    </>
   );
 };

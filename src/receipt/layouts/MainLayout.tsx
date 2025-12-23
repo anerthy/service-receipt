@@ -1,10 +1,12 @@
-import type { PropsWithChildren } from 'react';
+import { Outlet } from 'react-router';
 
-export const MainLayout = ({ children }: PropsWithChildren) => {
+const MainLayout = () => {
   return (
     // max-w-md
     <div className="relative flex h-full min-h-screen w-full flex-col bg-background-light dark:bg-background-dark mx-auto shadow-2xl overflow-hidden">
-      {children}
+      <Outlet />
     </div>
   );
 };
+
+export default MainLayout;

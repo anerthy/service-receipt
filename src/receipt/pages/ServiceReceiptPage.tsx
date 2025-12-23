@@ -1,12 +1,12 @@
 // import { AdvancedFiltered } from '../components/AdvancedFiltered';
 // import { ReceiptStatus } from '../components/ReceiptStatus';
+import { Link } from 'react-router';
 import { ServiceReceiptList } from '../components/ServiceReceiptList';
 import { TopHeader } from '../components/TopHeader';
-import { MainLayout } from '../layouts/MainLayout';
 
-export const ServiceReceipts = () => {
+export const ServiceReceiptPage = () => {
   return (
-    <MainLayout>
+    <>
       <TopHeader />
       <div className="px-4 py-3 bg-background-light dark:bg-background-dark z-10">
         <label className="flex flex-col w-full">
@@ -30,11 +30,13 @@ export const ServiceReceipts = () => {
 
       <ServiceReceiptList />
 
-      <div className="absolute bottom-6 right-6 z-30">
-        <button className="flex items-center justify-center h-14 w-14 rounded-2xl bg-primary text-white shadow-lg shadow-blue-500/40 hover:bg-blue-600 active:scale-95 transition-all">
-          <span className="material-symbols-outlined text-[28px]">add</span>
-        </button>
-      </div>
-    </MainLayout>
+      <Link to={'/new-service-receipt'}>
+        <div className="absolute bottom-6 right-6 z-30">
+          <button className="flex items-center justify-center h-14 w-14 rounded-2xl bg-primary text-white shadow-lg shadow-blue-500/40 hover:bg-blue-600 active:scale-95 transition-all">
+            <span className="material-symbols-outlined text-[28px]">add</span>
+          </button>
+        </div>
+      </Link>
+    </>
   );
 };
