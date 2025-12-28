@@ -13,6 +13,7 @@ import {
   SidebarRail,
 } from '@/components/ui/sidebar';
 import { Link } from 'react-router';
+import { Menu } from 'lucide-react';
 
 // This is sample data.
 const data = {
@@ -23,12 +24,12 @@ const data = {
       url: '/dashboard',
       items: [
         {
-          title: 'Mechanics',
-          url: '/dashboard',
+          title: 'Services',
+          url: '/dashboard/services',
         },
         {
-          title: 'Services',
-          url: '/dashboard',
+          title: 'Mechanics',
+          url: '/dashboard/mechanics',
         },
       ],
     },
@@ -38,16 +39,16 @@ const data = {
       items: [
         {
           title: 'Customers',
-          url: '/dashboard',
+          url: '/dashboard/customers',
           isActive: true,
         },
         {
           title: 'Vehicles',
-          url: '/dashboard',
+          url: '/dashboard/vehicles',
         },
         {
           title: 'Service Receipts',
-          url: '/dashboard',
+          url: '/dashboard/service-receipts',
         },
       ],
     },
@@ -65,7 +66,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
           <SidebarGroup key={item.title}>
-            <SidebarGroupLabel>{item.title}</SidebarGroupLabel>
+            <SidebarGroupLabel className="flex gap-1">
+              <Menu />
+              {item.title}
+            </SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
                 {item.items.map((item) => (
