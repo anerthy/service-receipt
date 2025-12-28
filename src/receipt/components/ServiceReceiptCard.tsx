@@ -1,3 +1,5 @@
+import { ChevronRight, Motorbike, UserRoundCog } from 'lucide-react';
+
 interface Props {
   id: string;
   status: string;
@@ -31,7 +33,7 @@ export const ServiceReceiptCard = (props: Props) => {
   };
 
   return (
-    <div className="group relative flex flex-col gap-3 rounded-2xl bg-white dark:bg-card-dark p-4 shadow-sm border border-slate-100 dark:border-slate-800 hover:border-primary/30 transition-all">
+    <div className="group relative flex flex-col gap-3 rounded-2xl p-4 shadow-sm border border-slate-100 dark:border-slate-800 hover:border-primary/30 transition-all">
       <div className="flex justify-between items-start">
         <div className="flex items-center gap-2">
           <span
@@ -61,9 +63,7 @@ export const ServiceReceiptCard = (props: Props) => {
             {customerName}
           </h3>
           <div className="flex items-center gap-1 mt-1 text-sm text-slate-500 dark:text-slate-400">
-            <span className="material-symbols-outlined text-[16px]">
-              two_wheeler
-            </span>
+            <Motorbike className="text-[16px]" />
             <span>{model}</span>
             <span className="mx-1">•</span>
             <span className="font-mono text-slate-700 dark:text-slate-300 font-medium">
@@ -73,9 +73,7 @@ export const ServiceReceiptCard = (props: Props) => {
         </div>
       </div>
       <div className="flex items-center gap-2 text-xs text-slate-500 mt-1">
-        <span className="material-symbols-outlined text-[16px] text-slate-400">
-          engineering
-        </span>
+        <UserRoundCog className="text-[16px] text-slate-400" />
         <span>Mecánico: {mechanicName}</span>
       </div>
       <div className="mt-1 flex items-center justify-between border-t border-slate-100 dark:border-slate-700 pt-3">
@@ -83,10 +81,7 @@ export const ServiceReceiptCard = (props: Props) => {
           Ingreso: {receptionDate.toLocaleDateString()}
         </span>
         <button className="flex items-center text-sm font-medium text-primary hover:text-blue-700 dark:hover:text-blue-400">
-          Ver Detalles{' '}
-          <span className="material-symbols-outlined text-[18px] ml-1">
-            chevron_right
-          </span>
+          Ver Detalles <ChevronRight className="text-[18px] ml-1" />
         </button>
       </div>
     </div>
