@@ -11,6 +11,7 @@ import { LoginPage } from './auth/pages/login/LoginPage';
 import { RegisterPage } from './auth/pages/register/RegisterPage';
 import { DashboardLayout } from './dasboard/layouts/DashboardLayout';
 import { DasboardPage } from './dasboard/pages/DasboardPage';
+import { MechanicsPage } from './mechanics/pages/MechanicsPage';
 
 const MainLayout = lazy(() => import('./receipt/layouts/MainLayout'));
 
@@ -62,6 +63,14 @@ export const AppRouter = createBrowserRouter([
       {
         index: true,
         element: <DasboardPage />,
+      },
+      {
+        path: 'mechanics',
+        element: <MechanicsPage />,
+      },
+      {
+        path: 'service-receipts',
+        element: <ServiceReceiptPage />,
       },
     ],
   },
