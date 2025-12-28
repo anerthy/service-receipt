@@ -1,7 +1,15 @@
-import { createBrowserRouter } from 'react-router';
+import { createBrowserRouter, Navigate } from 'react-router';
 import { lazy } from 'react';
 import { ServiceReceiptPage } from './receipt/pages/ServiceReceiptPage';
 import { NewServiceReceiptPage } from './receipt/pages/NewServiceReceiptPage';
+import {
+  AuthenticatedRoute,
+  NotAuthenticatedRoute,
+} from './components/routes/ProtectedRoutes';
+import AuthLayout from './auth/layouts/AuthLayout';
+import { LoginPage } from './auth/pages/login/LoginPage';
+import { RegisterPage } from './auth/pages/register/RegisterPage';
+import { DashboardLayout } from './auth/pages/dasboard/DashboardLayout';
 
 const MainLayout = lazy(() => import('./receipt/layouts/MainLayout'));
 
@@ -19,6 +27,36 @@ export const AppRouter = createBrowserRouter([
         element: <NewServiceReceiptPage />,
       },
     ],
+  },
+  {
+    path: '/auth',
+    element: (
+      <NotAuthenticatedRoute>
+        <AuthLayout />
+      </NotAuthenticatedRoute>
+    ),
+    children: [
+      {
+        index: true,
+        element: <Navigate to="/auth/login" />, // protecting the /auth route
+      },
+      {
+        path: 'login',
+        element: <LoginPage />,
+      },
+      {
+        path: 'register',
+        element: <RegisterPage />,
+      },
+    ],
+  },
+  {
+    path: '/dashboard',
+    element: (
+      <AuthenticatedRoute>
+        <DashboardLayout />
+      </AuthenticatedRoute>
+    ),
   },
   {
     path: '*',
