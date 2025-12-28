@@ -1,6 +1,18 @@
 import type { Customer, Mechanic, Service } from '@/interfaces';
 import { supabase } from '@/lib/supabase';
+import {
+  ChevronDown,
+  ClipboardPen,
+  Gauge,
+  Motorbike,
+  Save,
+  Search,
+  User,
+  Wrench,
+  X,
+} from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router';
 
 export const NewServiceReceiptPage = () => {
   const FUEL_LEVELS = ['E', '1/4', '1/2', '3/4', 'F'];
@@ -69,11 +81,11 @@ export const NewServiceReceiptPage = () => {
         {/* <!-- Sticky Header --> */}
         <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#101822]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-center justify-between px-4 py-3 max-w-lg mx-auto w-full">
-            <button className="flex items-center justify-center p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
-              <span className="material-symbols-outlined text-[24px]">
-                close
-              </span>
-            </button>
+            <Link to="/">
+              <button className="flex items-center justify-center p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
+                <X className="text-[24px]" />
+              </button>
+            </Link>
             <h1 className="text-lg font-bold leading-tight tracking-tight">
               Nueva Boleta
             </h1>
@@ -86,9 +98,7 @@ export const NewServiceReceiptPage = () => {
           {/* <!-- Section: Datos del Cliente --> */}
           <section className="mt-4 px-4">
             <div className="flex items-center gap-2 mb-2">
-              <span className="material-symbols-outlined text-primary text-[20px]">
-                person
-              </span>
+              <User className="text-primary text-[20px]" />
               <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Datos del Cliente
               </h2>
@@ -112,9 +122,7 @@ export const NewServiceReceiptPage = () => {
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2">
                       <button className="p-1.5 bg-primary text-white rounded-md hover:bg-blue-600 transition-colors">
-                        <span className="material-symbols-outlined text-[18px]">
-                          search
-                        </span>
+                        <Search className="text-[18px]" />
                       </button>
                     </div>
                   </div>
@@ -174,9 +182,7 @@ export const NewServiceReceiptPage = () => {
           {/* <!-- Section: Datos de la Moto --> */}
           <section className="mt-6 px-4">
             <div className="flex items-center gap-2 mb-2">
-              <span className="material-symbols-outlined text-primary text-[20px]">
-                two_wheeler
-              </span>
+              <Motorbike className="text-primary text-[20px]" />
               <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Datos de la Moto
               </h2>
@@ -196,9 +202,7 @@ export const NewServiceReceiptPage = () => {
                     />
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2">
                       <button className="p-1.5 bg-primary text-white rounded-md hover:bg-blue-600 transition-colors">
-                        <span className="material-symbols-outlined text-[18px]">
-                          search
-                        </span>
+                        <Search className="text-[18px]" />
                       </button>
                     </div>
                   </div>
@@ -262,9 +266,7 @@ export const NewServiceReceiptPage = () => {
           {/* <!-- Section: Estado Actual --> */}
           <section className="mt-6 px-4">
             <div className="flex items-center gap-2 mb-2">
-              <span className="material-symbols-outlined text-primary text-[20px]">
-                speed
-              </span>
+              <Gauge className="text-primary text-[20px]" />
               <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Estado Actual
               </h2>
@@ -317,9 +319,7 @@ export const NewServiceReceiptPage = () => {
           {/* <!-- Section: Servicios --> */}
           <section className="mt-6 px-4">
             <div className="flex items-center gap-2 mb-2">
-              <span className="material-symbols-outlined text-primary text-[20px]">
-                build_circle
-              </span>
+              <Wrench className="text-primary text-[20px]" />
               <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Servicios Solicitados
               </h2>
@@ -347,9 +347,7 @@ export const NewServiceReceiptPage = () => {
           {/* <!-- Section: Detalles Finales --> */}
           <section className="mt-6 px-4">
             <div className="flex items-center gap-2 mb-2">
-              <span className="material-symbols-outlined text-primary text-[20px]">
-                assignment
-              </span>
+              <ClipboardPen className="text-primary text-[20px]" />
               <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
                 Detalles Finales
               </h2>
@@ -370,9 +368,7 @@ export const NewServiceReceiptPage = () => {
                     ))}
                   </select>
                   <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-slate-500">
-                    <span className="material-symbols-outlined text-[20px]">
-                      expand_more
-                    </span>
+                    <ChevronDown className="text-[20px]" />
                   </div>
                 </div>
               </div>
@@ -391,8 +387,8 @@ export const NewServiceReceiptPage = () => {
           </section>
           {/* <!-- Sticky Bottom Action --> */}
           <div className="fixed bottom-0 left-0 right-0 p-4 bg-white/90 dark:bg-[#101822]/90 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 z-40 max-w-lg mx-auto">
-            <button className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-xl shadow-lg shadow-blue-500/30 active:scale-[0.98] transition-all flex items-center justify-center gap-2">
-              <span className="material-symbols-outlined">save</span>
+            <button className="w-full bg-primary hover:bg-blue-600 text-white font-bold py-3.5 rounded-xl flex items-center justify-center gap-2">
+              <Save />
               Crear Boleta de Servicio
             </button>
           </div>
