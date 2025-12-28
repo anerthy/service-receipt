@@ -9,7 +9,7 @@ import {
 import AuthLayout from './auth/layouts/AuthLayout';
 import { LoginPage } from './auth/pages/login/LoginPage';
 import { RegisterPage } from './auth/pages/register/RegisterPage';
-import { DashboardLayout } from './auth/pages/dasboard/DashboardLayout';
+import { DashboardLayout } from './dasboard/layouts/DashboardLayout';
 
 const MainLayout = lazy(() => import('./receipt/layouts/MainLayout'));
 
