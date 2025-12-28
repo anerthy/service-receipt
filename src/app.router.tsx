@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from 'react-router';
+import { createHashRouter, Navigate } from 'react-router';
 import { lazy } from 'react';
 import { ServiceReceiptPage } from './receipt/pages/ServiceReceiptPage';
 import { NewServiceReceiptPage } from './receipt/pages/NewServiceReceiptPage';
@@ -15,7 +15,7 @@ import { MechanicsPage } from './mechanics/pages/MechanicsPage';
 
 const MainLayout = lazy(() => import('./receipt/layouts/MainLayout'));
 
-export const AppRouter = createBrowserRouter([
+export const AppRouter = createHashRouter([
   {
     path: '/',
     element: <MainLayout />,
