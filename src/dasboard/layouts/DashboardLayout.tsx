@@ -14,6 +14,7 @@ import {
   SidebarTrigger,
 } from '@/components/ui/sidebar';
 import { Outlet } from 'react-router';
+import { ModeToggle } from '@/components/mode-toggle';
 
 export const DashboardLayout = () => {
   return (
@@ -37,6 +38,9 @@ export const DashboardLayout = () => {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
+          <div className="flex justify-end items-end flex-1">
+            <ModeToggle />
+          </div>
         </header>
         <div className="flex flex-1 flex-col gap-4 p-4">
           <Outlet />
