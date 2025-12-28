@@ -1,9 +1,11 @@
+import { Menu } from 'lucide-react';
+
 export const TopHeader = () => {
   return (
     <header className="sticky top-0 z-20 flex items-center justify-between bg-background-light dark:bg-background-dark px-4 py-3 border-b border-slate-200 dark:border-slate-800">
       <div className="flex items-center gap-3">
         <button className="flex items-center justify-center p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors text-slate-900 dark:text-white">
-          <span className="material-symbols-outlined">menu</span>
+          <Menu />
         </button>
         <h1 className="text-xl font-bold tracking-tight text-slate-900 dark:text-white">
           Taller Mejías
