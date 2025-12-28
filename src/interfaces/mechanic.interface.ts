@@ -6,6 +6,6 @@ export interface Mechanic {
   phone: string;
   address: string;
   is_active: boolean;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
 }
