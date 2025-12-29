@@ -29,7 +29,7 @@ export const DashboardLayout = () => {
     '/dashboard/service-receipts': 'Service Receipts',
   };
 
-  let breadcrumb: string = breadcrumbs[pathname];
+  let breadcrumb = breadcrumbs[pathname as keyof typeof breadcrumbs];
 
   if (!breadcrumb) {
     if (pathname.startsWith('/dashboard/customers/')) {
