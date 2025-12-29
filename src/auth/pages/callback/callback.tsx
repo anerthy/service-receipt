@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 import { supabase } from '@/lib/supabase';
-
+// TODO: Revisar si es necesaria
 export const AuthCallbackPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
