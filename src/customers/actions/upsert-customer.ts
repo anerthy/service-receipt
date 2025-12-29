@@ -8,15 +8,13 @@ export const upsertCustomer = async (
 
   const isCreating = !id || id === 'new';
 
-  const productToUpsert = isCreating
+  const customerToUpsert = isCreating
     ? { ...customerLike, id: undefined }
     : customerLike;
 
-  console.log(productToUpsert);
-
   const { data, error } = await supabase
     .from('customers')
-    .upsert(productToUpsert)
+    .upsert(customerToUpsert)
     .eq('id', id)
     .select()
     .single();
