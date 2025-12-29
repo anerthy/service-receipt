@@ -8,11 +8,12 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useServices } from './hooks/useServices';
+import { useServices } from '../hooks/useServices';
 import { FullScreenLoading } from '@/components/custom/FullScreenLoading';
 import type { Service } from '@/interfaces';
 import { Wrench } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { Pagination } from '@/components/custom/Pagination';
 
 export function ServicesPage() {
   const { data, isLoading, error } = useServices();
@@ -25,7 +26,7 @@ export function ServicesPage() {
 
   return (
     <Table>
-      <TableCaption>A list of your recent invoices.</TableCaption>
+      <TableCaption>Servicios que ofrece el taller</TableCaption>
       <TableHeader>
         <TableHead className="flex gap-1 items-center justify-start">
           <Wrench />
@@ -56,9 +57,8 @@ export function ServicesPage() {
       </TableBody>
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
-          <TableCell className="text-right">
-            {services.length} services
+          <TableCell colSpan={4}>
+            <Pagination totalPages={Math.ceil(services.length / 10)} />
           </TableCell>
         </TableRow>
       </TableFooter>
