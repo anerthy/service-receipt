@@ -12,7 +12,7 @@ import { FullScreenLoading } from '@/components/custom/FullScreenLoading';
 import type { Customer } from '@/interfaces';
 import { Pen } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { useCustomers } from '../hooks/useCustomers';
+import { useCustomers } from '../../hooks/useCustomers';
 import { Pagination } from '@/components/custom/Pagination';
 import { Link } from 'react-router';
 import { AdminHeader } from '@/dasboard/components/AdminHeader';

@@ -1,7 +1,7 @@
 import type { Customer } from '@/interfaces';
 import { useNavigate, useParams } from 'react-router';
 import { CustomerForm } from './ui/CustomerForm';
-import { useCustomer } from '../hooks/useCustomer';
+import { useCustomer } from '../../hooks/useCustomer';
 import { FullScreenLoading } from '@/components/custom/FullScreenLoading';
 import { toast } from 'sonner';
 
