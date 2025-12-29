@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { upsertCustomer } from '../actions/upsert-customer';
-import { getCustomerAction } from '../actions/get-customer.action';
+import { getCustomerAction } from '../actions/get-customer-by-id.action';
 
 export const useCustomer = (id: string) => {
   const queryClient = useQueryClient();
