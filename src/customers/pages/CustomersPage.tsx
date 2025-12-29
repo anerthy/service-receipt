@@ -10,10 +10,12 @@ import {
 } from '@/components/ui/table';
 import { FullScreenLoading } from '@/components/custom/FullScreenLoading';
 import type { Customer } from '@/interfaces';
-import { Pen, Wrench } from 'lucide-react';
+import { Pen } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useCustomers } from '../hooks/useCustomers';
 import { Pagination } from '@/components/custom/Pagination';
+import { Link } from 'react-router';
+import { AdminHeader } from '@/dasboard/components/AdminHeader';
 
 export function CustomersPage() {
   const { data, isLoading, error } = useCustomers();
@@ -24,44 +26,50 @@ export function CustomersPage() {
   const customers: Customer[] = data || [];
 
   return (
-    <Table>
-      <TableCaption>Lista de clientes del Taller</TableCaption>
-      <TableHeader>
-        <TableHead className="flex gap-1 items-center justify-start">
-          <Wrench />
-          <h1 className="font-bold text-2xl">Servicios</h1>
-        </TableHead>
-        <TableRow>
-          <TableHead className="w-25">DNI</TableHead>
-          <TableHead>Nombre</TableHead>
-          <TableHead>Telefono</TableHead>
-          <TableHead>Email</TableHead>
-          <TableHead>Acciones</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {customers.map((customer) => (
-          <TableRow key={customer.id}>
-            <TableCell className="font-medium">{customer.dni}</TableCell>
-            <TableCell>{customer.name}</TableCell>
-            <TableCell>{customer.phone}</TableCell>
-            <TableCell>{customer.email}</TableCell>
-            <TableCell>
-              <Badge variant="secondary">
-                <Pen />
-                Editar
-              </Badge>
+    <>
+      <AdminHeader
+        title="Clientes"
+        description="Lista de clientes del taller"
+        to="/dashboard/customers/new"
+      />
+
+      <Table>
+        <TableCaption>Lista de clientes del Taller</TableCaption>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="w-25">DNI</TableHead>
+            <TableHead>Nombre</TableHead>
+            <TableHead>Telefono</TableHead>
+            <TableHead>Email</TableHead>
+            <TableHead>Acciones</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {customers.map((customer) => (
+            <TableRow key={customer.id}>
+              <TableCell className="font-medium">{customer.dni}</TableCell>
+              <TableCell>{customer.name}</TableCell>
+              <TableCell>{customer.phone}</TableCell>
+              <TableCell>{customer.email}</TableCell>
+              <TableCell>
+                <Link to={`/dashboard/customers/${customer.id}`}>
+                  <Badge>
+                    <Pen />
+                    Editar
+                  </Badge>
+                </Link>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TableCell colSpan={5}>
+              <Pagination totalPages={Math.ceil(customers.length / 10)} />
             </TableCell>
           </TableRow>
-        ))}
-      </TableBody>
-      <TableFooter>
-        <TableRow>
-          <TableCell colSpan={5}>
-            <Pagination totalPages={Math.ceil(customers.length / 10)} />
-          </TableCell>
-        </TableRow>
-      </TableFooter>
-    </Table>
+        </TableFooter>
+      </Table>
+    </>
   );
 }
