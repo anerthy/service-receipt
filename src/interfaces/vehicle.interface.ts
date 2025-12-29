@@ -7,7 +7,7 @@ export interface Vehicle {
   color: string;
   cubic_capacity: number;
   customer_id: string;
-  is_active: boolean;
-  created_at: Date;
-  updated_at: Date;
+  is_active?: boolean;
+  created_at?: Date;
+  updated_at?: Date;
 }
