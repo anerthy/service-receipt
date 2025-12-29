@@ -1,8 +1,7 @@
-import * as React from 'react';
-
 import {
   Sidebar,
   SidebarContent,
+  SidebarFooter,
   SidebarGroup,
   SidebarGroupContent,
   SidebarGroupLabel,
@@ -14,6 +13,8 @@ import {
 } from '@/components/ui/sidebar';
 import { Link } from 'react-router';
 import { Menu } from 'lucide-react';
+import { useAuth } from '@/hooks/use-auth';
+import { NavUser } from './nav-user';
 
 // This is sample data.
 const data = {
@@ -56,6 +57,8 @@ const data = {
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user } = useAuth();
+
   return (
     <Sidebar {...props}>
       <SidebarHeader>
@@ -85,6 +88,15 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         ))}
       </SidebarContent>
       <SidebarRail />
+      <SidebarFooter>
+        <NavUser
+          user={{
+            email: user?.email || '',
+            name: user?.id.substring(0, 8) || 'unknown user',
+            avatar: 'https://placehold.co/600x400/transparent/F00?text=P',
+          }}
+        />
+      </SidebarFooter>
     </Sidebar>
   );
 }
