@@ -4,6 +4,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './providers/AuthProvider';
+import { Toaster } from 'sonner';
 
 const queryClient = new QueryClient();
 
@@ -11,6 +12,7 @@ function App() {
   return (
     <ThemeProvider>
       <QueryClientProvider client={queryClient}>
+        <Toaster />
         <AuthProvider>
           <RouterProvider router={AppRouter} />
           <ReactQueryDevtools initialIsOpen={false} />
