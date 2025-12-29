@@ -1,5 +1,4 @@
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import {
   Item,
@@ -9,8 +8,8 @@ import {
   ItemMedia,
   ItemTitle,
 } from '@/components/ui/item';
+import { AdminHeader } from '@/dasboard/components/AdminHeader';
 import type { Mechanic } from '@/interfaces';
-import { Plus } from 'lucide-react';
 import { Link } from 'react-router';
 
 const mechanics: Mechanic[] = [
@@ -36,53 +35,55 @@ const mechanics: Mechanic[] = [
 
 export function MechanicsPage() {
   return (
-    <div className="flex w-full  flex-col gap-6">
-      <div className="flex w-full max-w-sm items-center gap-2">
-        <Input type="email" placeholder="Buscar por nombre..." />
-        <Link to="/dashboard/mechanics/new">
-          <Button type="submit" variant="outline">
-            <Plus />
-            Nuevo
-          </Button>
-        </Link>
-      </div>
+    <>
+      <AdminHeader
+        title="Mecánicos"
+        description="Gestión de mecánicos del taller"
+        to="/dashboard/mechanics/new"
+      />
 
-      <ItemGroup className="gap-4">
-        {mechanics.map((mechanic) => (
-          <Item key={mechanic.id} variant="outline" asChild role="listitem">
-            <Link to={`/dashboard/mechanics/${mechanic.id}`}>
-              <ItemMedia variant="image">
-                <img
-                  src={`https://placehold.co/600x400?text=${mechanic.name.substring(
-                    0,
-                    1
-                  )}`}
-                  alt={mechanic.name}
-                  width={32}
-                  height={32}
-                  className="object-cover grayscale"
-                />
-              </ItemMedia>
-              <ItemContent>
-                <ItemTitle className="line-clamp-1">
-                  {mechanic.name} -{' '}
-                  <span className="text-muted-foreground">{mechanic.id}</span>
-                </ItemTitle>
-                <ItemDescription>{mechanic.email}</ItemDescription>
-              </ItemContent>
-              <ItemContent className="flex-none text-center">
-                <ItemDescription>
-                  <Badge
-                    variant={mechanic.is_active ? 'default' : 'destructive'}
-                  >
-                    {mechanic.is_active ? 'Active' : 'Inactive'}
-                  </Badge>
-                </ItemDescription>
-              </ItemContent>
-            </Link>
-          </Item>
-        ))}
-      </ItemGroup>
-    </div>
+      <div className="flex w-full flex-col gap-6">
+        <div className="flex w-full items-center gap-2">
+          <Input type="email" placeholder="Buscar por nombre..." />
+        </div>
+
+        <ItemGroup className="gap-4">
+          {mechanics.map((mechanic) => (
+            <Item key={mechanic.id} variant="outline" asChild role="listitem">
+              <Link to={`/dashboard/mechanics/${mechanic.id}`}>
+                <ItemMedia variant="image">
+                  <img
+                    src={`https://placehold.co/600x400?text=${mechanic.name.substring(
+                      0,
+                      1
+                    )}`}
+                    alt={mechanic.name}
+                    width={32}
+                    height={32}
+                    className="object-cover grayscale"
+                  />
+                </ItemMedia>
+                <ItemContent>
+                  <ItemTitle className="line-clamp-1">
+                    {mechanic.name} -{' '}
+                    <span className="text-muted-foreground">{mechanic.id}</span>
+                  </ItemTitle>
+                  <ItemDescription>{mechanic.email}</ItemDescription>
+                </ItemContent>
+                <ItemContent className="flex-none text-center">
+                  <ItemDescription>
+                    <Badge
+                      variant={mechanic.is_active ? 'default' : 'destructive'}
+                    >
+                      {mechanic.is_active ? 'Active' : 'Inactive'}
+                    </Badge>
+                  </ItemDescription>
+                </ItemContent>
+              </Link>
+            </Item>
+          ))}
+        </ItemGroup>
+      </div>
+    </>
   );
 }
