@@ -1,4 +1,4 @@
-import { createHashRouter, Navigate } from 'react-router';
+import { createBrowserRouter, Navigate } from 'react-router';
 import { lazy } from 'react';
 import { ServiceReceiptPage } from './receipt/pages/ServiceReceiptPage';
 import { NewServiceReceiptPage } from './receipt/pages/NewServiceReceiptPage';
@@ -12,10 +12,11 @@ import { RegisterPage } from './auth/pages/register/RegisterPage';
 import { DashboardLayout } from './dasboard/layouts/DashboardLayout';
 import { DasboardPage } from './dasboard/pages/DasboardPage';
 import { MechanicsPage } from './mechanics/pages/MechanicsPage';
+import { AuthCallbackPage } from './auth/pages/callback/callback';
 
 const MainLayout = lazy(() => import('./receipt/layouts/MainLayout'));
 
-export const AppRouter = createHashRouter([
+export const AppRouter = createBrowserRouter([
   {
     path: '/',
     element: <MainLayout />,
@@ -49,6 +50,10 @@ export const AppRouter = createHashRouter([
       {
         path: 'register',
         element: <RegisterPage />,
+      },
+      {
+        path: 'callback',
+        element: <AuthCallbackPage />,
       },
     ],
   },
