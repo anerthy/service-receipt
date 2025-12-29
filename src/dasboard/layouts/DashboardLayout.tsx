@@ -13,10 +13,32 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 import { ModeToggle } from '@/components/mode-toggle';
 
 export const DashboardLayout = () => {
+  // TODO: Refactor breadcrumb to support dynamic routes
+  const { pathname } = useLocation();
+
+  const breadcrumbs = {
+    '/dashboard': 'Dashboard',
+    '/dashboard/services': 'Services',
+    '/dashboard/mechanics': 'Mechanics',
+    '/dashboard/customers': 'Customers',
+    '/dashboard/vehicles': 'Vehicles',
+    '/dashboard/service-receipts': 'Service Receipts',
+  };
+
+  let breadcrumb: string = breadcrumbs[pathname];
+
+  if (!breadcrumb) {
+    if (pathname.startsWith('/dashboard/customers/')) {
+      breadcrumb = 'Customer Details';
+    } else if (pathname.startsWith('/dashboard/vehicles/')) {
+      breadcrumb = 'Vehicle Details';
+    }
+  }
+
   return (
     <SidebarProvider>
       <AppSidebar />
@@ -34,7 +56,7 @@ export const DashboardLayout = () => {
               </BreadcrumbItem>
               <BreadcrumbSeparator className="hidden md:block" />
               <BreadcrumbItem>
-                <BreadcrumbPage>Products</BreadcrumbPage>
+                <BreadcrumbPage>{breadcrumb}</BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
