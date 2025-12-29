@@ -16,6 +16,7 @@ import { AuthCallbackPage } from './auth/pages/callback/callback';
 import { ServicesPage } from './services/pages/ServicesPage';
 import { CustomersPage } from './customers/pages/CustomersPage';
 import { VehiclesPage } from './vehicles/pages/VehiclesPage';
+import { CustomerPage } from './customers/pages/CustomerPage';
 
 const MainLayout = lazy(() => import('./receipt/layouts/MainLayout'));
 
@@ -87,6 +88,10 @@ export const AppRouter = createBrowserRouter([
       {
         path: 'customers',
         element: <CustomersPage />,
+      },
+      {
+        path: 'customers/:id',
+        element: <CustomerPage />,
       },
       {
         path: 'vehicles',
