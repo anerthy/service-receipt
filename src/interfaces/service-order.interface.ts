@@ -3,14 +3,14 @@ export interface ServiceOrder {
   customer_id: string;
   vehicle_id: string;
   mileage: number;
-  fuel: number;
+  fuel: string;
   reception_date: Date;
-  completion_date: Date | null;
+  completion_date?: Date;
   status: 'pending' | 'in_progress' | 'completed' | 'cancelled';
   total_cost: number;
   notes: string;
   mechanic_id: string;
   received_by: string;
-  created_at: Date;
-  updated_at: Date;
+  created_at?: Date;
+  updated_at?: Date;
 }
