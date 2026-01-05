@@ -1,5 +1,9 @@
-import type { Customer, Mechanic, Service } from '@/interfaces';
+import { Input } from '@/components/ui/input';
+import type { Customer, ServiceOrder } from '@/interfaces';
+import { FUEL_LEVELS } from '@/interfaces/fuel-level.type';
 import { supabase } from '@/lib/supabase';
+import { useMechanics } from '@/mechanics/hooks/useMechanics';
+import { useServices } from '@/services/hooks/useServices';
 import {
   ChevronDown,
   ClipboardPen,
@@ -11,19 +15,34 @@ import {
   Wrench,
   X,
 } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { Link } from 'react-router';
 
-export const NewServiceReceiptPage = () => {
-  const FUEL_LEVELS = ['E', '1/4', '1/2', '3/4', 'F'];
+const createServiceOrder = async (order: ServiceOrder) => {
+  console.log(order);
+};
 
-  const [services, setServices] = useState<Service[]>([]);
-  const [mechanics, setMechanics] = useState<Mechanic[]>([]);
-  const [customer, setCustomer] = useState<Customer>({} as Customer);
+const serviceOrder: ServiceOrder = {
+  id: '',
+  customer_id: '',
+  vehicle_id: '',
+  mileage: 0,
+  fuel: 'F',
+  reception_date: new Date(),
+  status: 'pending',
+  total_cost: 0,
+  notes: '',
+  mechanic_id: '',
+  received_by: '',
+};
+
+export const NewServiceReceiptPage = () => {
+  const { data: services = [] } = useServices();
+  const { data: mechanics = [] } = useMechanics();
 
   const customerDNIRef = useRef<HTMLInputElement>(null);
-
-  const [fuelLevel, setFuelLevel] = useState<keyof typeof FUEL_LEVELS>();
+  const [customer, setCustomer] = useState<Customer>({} as Customer);
 
   const queryCustomer = async () => {
     const customerDNI = customerDNIRef.current?.value;
@@ -39,41 +58,15 @@ export const NewServiceReceiptPage = () => {
     setCustomer((data![0] as Customer) || ({} as Customer));
   };
 
-  useEffect(() => {
-    async function getServices() {
-      const { data } = await supabase
-        .from('services')
-        .select()
-        .order('name', { ascending: true });
+  const { register, handleSubmit, setValue, getValues, watch } = useForm({
+    defaultValues: serviceOrder,
+  });
 
-      const services = data as Service[] | [];
+  const fuelLevel = watch('fuel');
 
-      if (services.length === 0) return;
-
-      setServices(services);
-    }
-
-    async function getMechanics() {
-      const { data, error } = await supabase
-        .from('mechanics')
-        .select()
-        .order('name', { ascending: true })
-        .limit(1);
-
-      if (error) {
-        console.log('Error fetching mechanics:', error.message);
-        return;
-      }
-
-      const mechanics = data as Mechanic[] | [];
-
-      if (mechanics.length === 0) return;
-      setMechanics(mechanics);
-    }
-
-    getMechanics();
-    getServices();
-  }, []);
+  const handleFuelLevel = (level: string) => {
+    setValue('fuel', level);
+  };
 
   return (
     <>
@@ -94,7 +87,10 @@ export const NewServiceReceiptPage = () => {
             </button>
           </div>
         </header>
-        <main className="relative flex flex-col w-full max-w-lg mx-auto pb-24">
+        <form
+          onSubmit={handleSubmit(createServiceOrder)}
+          className="relative flex flex-col w-full max-w-lg mx-auto pb-24"
+        >
           {/* <!-- Section: Datos del Cliente --> */}
           <section className="mt-4 px-4">
             <div className="flex items-center gap-2 mb-2">
@@ -278,10 +274,18 @@ export const NewServiceReceiptPage = () => {
                   Kilometraje Actual
                 </label>
                 <div className="relative">
-                  <input
+                  <Input
+                    id="mileage"
+                    type="number"
+                    {...register('mileage', {
+                      required: 'El kilometraje es obligatorio',
+                      min: {
+                        value: 0,
+                        message: 'El kilometraje no puede ser negativo',
+                      },
+                    })}
                     className="w-full bg-slate-50 dark:bg-slate-900 border border-slate-300 dark:border-slate-600 rounded-lg px-3 py-2.5 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all dark:text-white pr-10"
                     placeholder="0"
-                    type="number"
                   />
                   <span className="absolute right-3 top-2.5 text-sm text-slate-400 font-medium">
                     km
@@ -294,15 +298,15 @@ export const NewServiceReceiptPage = () => {
                   <label className="block text-xs font-medium text-slate-500 dark:text-slate-400">
                     Combustible
                   </label>
-                  <span className="text-xs font-bold text-primary">50%</span>
+                  <span className="text-xs font-bold text-primary">
+                    {getValues('fuel')}
+                  </span>
                 </div>
                 <div className="flex w-full bg-slate-100 dark:bg-slate-900 rounded-lg p-1 gap-1">
                   {FUEL_LEVELS.map((level) => (
                     <button
                       key={level}
-                      onClick={() =>
-                        setFuelLevel(level as keyof typeof FUEL_LEVELS)
-                      }
+                      onClick={() => handleFuelLevel(level)}
                       className={`flex-1 py-2 rounded-md text-xs font-medium ${
                         fuelLevel === level
                           ? 'bg-primary text-white shadow-md'
@@ -392,7 +396,7 @@ export const NewServiceReceiptPage = () => {
               Crear Boleta de Servicio
             </button>
           </div>
-        </main>
+        </form>
       </div>
     </>
   );
