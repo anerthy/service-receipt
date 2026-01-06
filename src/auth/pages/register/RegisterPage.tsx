@@ -40,6 +40,12 @@ export function RegisterPage() {
       return;
     }
 
+    if (password.length < 8) {
+      toast.error('La contraseña debe tener al menos 8 caracteres');
+      setIsPosting(false);
+      return;
+    }
+
     try {
       const { user } = await signUp(email, password, username, fullName);
 
