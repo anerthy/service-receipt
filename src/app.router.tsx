@@ -17,6 +17,7 @@ import { ServicesPage } from './services/pages/ServicesPage';
 import { CustomersPage } from './customers/pages/customers/CustomersPage';
 import { VehiclesPage } from './vehicles/pages/VehiclesPage';
 import { CustomerPage } from './customers/pages/customer/CustomerPage';
+import { LandingPage } from './components/custom/LandingPage';
 
 const MainLayout = lazy(() => import('./receipt/layouts/MainLayout'));
 
@@ -27,7 +28,7 @@ export const AppRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ServiceReceiptPage />,
+        element: <LandingPage />,
       },
       {
         path: 'new-service-receipt',
