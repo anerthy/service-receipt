@@ -1,4 +1,3 @@
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
   Field,
@@ -8,15 +7,47 @@ import {
   FieldSeparator,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { Link } from 'react-router';
-import { signInWithGoogle } from '@/auth/services/auth.services';
+import { Link, useNavigate } from 'react-router';
+import { signInWithGoogle, singIn } from '@/auth/services/auth.services';
+import { useState, type FormEvent } from 'react';
+import { toast } from 'sonner';
 
-export function LoginPage({
-  className,
-  ...props
-}: React.ComponentProps<'form'>) {
+export function LoginPage() {
+  const navigate = useNavigate();
+  const [isPosting, setIsPosting] = useState(false);
+
+  const handleLogin = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsPosting(true);
+
+    const formData = new FormData(event.target as HTMLFormElement);
+
+    const email = formData.get('email') as string;
+    const password = formData.get('password') as string;
+
+    console.log(email, password);
+    if (!email || !password) {
+      setIsPosting(false);
+      return;
+    }
+
+    try {
+      const { user } = await singIn(email, password);
+
+      if (user.id) {
+        navigate('/dashboard');
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setIsPosting(false);
+    }
+  };
+
   return (
-    <form className={cn('flex flex-col gap-6', className)} {...props}>
+    <form className="flex flex-col gap-6" onSubmit={handleLogin}>
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Inicia sesión</h1>
@@ -27,12 +58,19 @@ export function LoginPage({
 
         <Field>
           <FieldLabel htmlFor="email">Correo electrónico</FieldLabel>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="m@example.com"
+            required
+          />
         </Field>
         <Field>
           <FieldLabel htmlFor="password">Contraseña</FieldLabel>
           <Input
             id="password"
+            name="password"
             type="password"
             placeholder="********"
             required
@@ -40,7 +78,9 @@ export function LoginPage({
         </Field>
 
         <Field>
-          <Button type="submit">Iniciar sesión</Button>
+          <Button type="submit" disabled={isPosting}>
+            Iniciar sesión
+          </Button>
         </Field>
         <FieldSeparator>O continúa con</FieldSeparator>
         <Field>
