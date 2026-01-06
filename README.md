@@ -17,3 +17,6 @@ npx shadcn@latest add input
 [Zustand](https://zustand.docs.pmnd.rs/getting-started/introduction)
 
 [react-hook-form](https://react-hook-form.com/get-started)
+
+Configurar register
+https://supabase.com/docs/guides/auth/managing-user-data?queryGroups=language&language=js
