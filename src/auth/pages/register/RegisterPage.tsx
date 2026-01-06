@@ -1,4 +1,4 @@
-import { cn } from '@/lib/utils';
+import { signUp } from '@/auth/services/auth.services';
 import { Button } from '@/components/ui/button';
 import {
   Field,
@@ -8,14 +8,55 @@ import {
   FieldSeparator,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import { Link } from 'react-router';
+import { useState, type FormEvent } from 'react';
+import { Link, useNavigate } from 'react-router';
+import { toast } from 'sonner';
 
-export function RegisterPage({
-  className,
-  ...props
-}: React.ComponentProps<'form'>) {
+export function RegisterPage() {
+  const navigate = useNavigate();
+  const [isPosting, setIsPosting] = useState(false);
+
+  const handleRegister = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsPosting(true);
+
+    const formData = new FormData(event.target as HTMLFormElement);
+
+    const fullName = formData.get('fullName') as string;
+    const email = formData.get('email') as string;
+    const username = formData.get('username') as string;
+    const password = formData.get('password') as string;
+    const confirmPassword = formData.get('confirmPassword') as string;
+
+    if (!email || !fullName || !username) {
+      toast.error('Por favor completa todos los campos');
+      setIsPosting(false);
+      return;
+    }
+
+    if (password !== confirmPassword) {
+      toast.error('Las contraseñas no coinciden');
+      setIsPosting(false);
+      return;
+    }
+
+    try {
+      const { user } = await signUp(email, password, username, fullName);
+
+      if (user?.id) {
+        navigate('/auth/login');
+        return;
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error instanceof Error ? error.message : String(error));
+    } finally {
+      setIsPosting(false);
+    }
+  };
+
   return (
-    <form className={cn('flex flex-col gap-6', className)} {...props}>
+    <form className="flex flex-col gap-6" onSubmit={handleRegister}>
       <FieldGroup>
         <div className="flex flex-col items-center gap-1 text-center">
           <h1 className="text-2xl font-bold">Crea tu cuenta</h1>
@@ -24,27 +65,56 @@ export function RegisterPage({
           </p>
         </div>
         <Field>
-          <FieldLabel htmlFor="name">Nombre completo</FieldLabel>
-          <Input id="name" type="text" placeholder="John Doe" required />
+          <FieldLabel htmlFor="fullName">Nombre completo</FieldLabel>
+          <Input
+            id="fullName"
+            name="fullName"
+            type="text"
+            placeholder="John Doe"
+            required
+          />
         </Field>
         <Field>
           <FieldLabel htmlFor="email">Correo electrónico</FieldLabel>
-          <Input id="email" type="email" placeholder="m@example.com" required />
+          <Input
+            id="email"
+            name="email"
+            type="email"
+            placeholder="m@example.com"
+            required
+          />
+        </Field>
+        <Field>
+          <FieldLabel htmlFor="username">Usuario</FieldLabel>
+          <Input
+            id="username"
+            name="username"
+            type="text"
+            placeholder="username"
+            required
+          />
         </Field>
         <Field>
           <FieldLabel htmlFor="password">Contraseña</FieldLabel>
-          <Input id="password" type="password" required />
+          <Input id="password" name="password" type="password" required />
           <FieldDescription>Debe tener al menos 8 caracteres.</FieldDescription>
         </Field>
         <Field>
           <FieldLabel htmlFor="confirm-password">
             Confirmar contraseña
           </FieldLabel>
-          <Input id="confirm-password" type="password" required />
+          <Input
+            id="confirm-password"
+            name="confirmPassword"
+            type="password"
+            required
+          />
           <FieldDescription>Por favor confirma tu contraseña.</FieldDescription>
         </Field>
         <Field>
-          <Button type="submit">Registrarse</Button>
+          <Button type="submit" disabled={isPosting}>
+            Registrarse
+          </Button>
         </Field>
         <FieldSeparator>O continúa con</FieldSeparator>
         <Field>
