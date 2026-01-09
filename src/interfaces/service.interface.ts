@@ -7,3 +7,5 @@ export interface Service {
   created_at: Date;
   updated_at: Date;
 }
+
+export type ServiceId = Pick<Service, 'id'>;
