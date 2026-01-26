@@ -21,34 +21,34 @@ const data = {
   versions: ['1.0.1', '1.1.0-alpha', '2.0.0-beta1'],
   navMain: [
     {
-      title: 'Maintaining',
+      title: 'Mantenimiento',
       url: '/dashboard',
       items: [
         {
-          title: 'Services',
+          title: 'Servicios',
           url: '/dashboard/services',
         },
         {
-          title: 'Mechanics',
+          title: 'Mecánicos',
           url: '/dashboard/mechanics',
         },
       ],
     },
     {
-      title: 'Configurations',
+      title: 'Configuraciones',
       url: '/dashboard',
       items: [
         {
-          title: 'Customers',
+          title: 'Clientes',
           url: '/dashboard/customers',
           isActive: true,
         },
         {
-          title: 'Vehicles',
+          title: 'Vehículos',
           url: '/dashboard/vehicles',
         },
         {
-          title: 'Service Receipts',
+          title: 'Mantenimientos',
           url: '/dashboard/service-receipts',
         },
       ],
