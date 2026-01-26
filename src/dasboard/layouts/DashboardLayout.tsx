@@ -22,20 +22,20 @@ export const DashboardLayout = () => {
 
   const breadcrumbs = {
     '/dashboard': 'Dashboard',
-    '/dashboard/services': 'Services',
-    '/dashboard/mechanics': 'Mechanics',
-    '/dashboard/customers': 'Customers',
-    '/dashboard/vehicles': 'Vehicles',
-    '/dashboard/service-receipts': 'Service Receipts',
+    '/dashboard/services': 'Servicios',
+    '/dashboard/mechanics': 'Mecánicos',
+    '/dashboard/customers': 'Clientes',
+    '/dashboard/vehicles': 'Vehículos',
+    '/dashboard/service-receipts': 'Mantenimientos',
   };
 
   let breadcrumb = breadcrumbs[pathname as keyof typeof breadcrumbs];
 
   if (!breadcrumb) {
     if (pathname.startsWith('/dashboard/customers/')) {
-      breadcrumb = 'Customer Details';
+      breadcrumb = 'Detalles del Cliente';
     } else if (pathname.startsWith('/dashboard/vehicles/')) {
-      breadcrumb = 'Vehicle Details';
+      breadcrumb = 'Detalles del Vehículo';
     }
   }
 
