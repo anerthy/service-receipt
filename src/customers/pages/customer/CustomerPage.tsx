@@ -42,7 +42,7 @@ export const CustomerPage = () => {
             error.message,
           {
             position: 'top-right',
-          }
+          },
         );
       },
     });
