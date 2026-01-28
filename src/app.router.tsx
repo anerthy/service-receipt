@@ -1,7 +1,6 @@
 import { createBrowserRouter, Navigate } from 'react-router';
 import { lazy } from 'react';
 import { ServiceReceiptPage } from './receipt/pages/ServiceReceiptPage';
-import { NewServiceReceiptPage } from './receipt/pages/NewServiceReceiptPage';
 import {
   AuthenticatedRoute,
   NotAuthenticatedRoute,
@@ -16,7 +15,7 @@ import { ServicesPage } from './services/pages/ServicesPage';
 import { CustomersPage } from './customers/pages/customers/CustomersPage';
 import { VehiclesPage } from './vehicles/pages/vehicles/VehiclesPage';
 import { CustomerPage } from './customers/pages/customer/CustomerPage';
-import { LandingPage } from './components/custom/LandingPage';
+// import { LandingPage } from './components/custom/LandingPage';
 import { MechanicsPage } from './mechanics/pages/mechanics/MechanicsPage';
 import { VehiclePage } from './vehicles/pages/vehicle/VehiclePage';
 
@@ -29,11 +28,7 @@ export const AppRouter = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <LandingPage />,
-      },
-      {
-        path: 'new-service-receipt',
-        element: <NewServiceReceiptPage />,
+        element: <Navigate to="/dashboard" />,
       },
     ],
   },
