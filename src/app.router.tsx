@@ -18,6 +18,8 @@ import { CustomerPage } from './customers/pages/customer/CustomerPage';
 // import { LandingPage } from './components/custom/LandingPage';
 import { MechanicsPage } from './mechanics/pages/mechanics/MechanicsPage';
 import { VehiclePage } from './vehicles/pages/vehicle/VehiclePage';
+import { ServiceReceiptsPage } from './receipt/pages/ServiceReceiptsPage';
+import { NewServiceReceiptPage } from './receipt/pages/NewServiceReceiptPage';
 
 const MainLayout = lazy(() => import('./receipt/layouts/MainLayout'));
 
@@ -76,7 +78,11 @@ export const AppRouter = createBrowserRouter([
       },
       {
         path: 'service-receipts',
-        element: <ServiceReceiptPage />,
+        element: <ServiceReceiptsPage />,
+      },
+      {
+        path: 'service-receipts/:id',
+        element: <NewServiceReceiptPage />,
       },
       {
         path: 'services',

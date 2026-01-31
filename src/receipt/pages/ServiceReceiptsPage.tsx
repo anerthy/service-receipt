@@ -6,7 +6,7 @@ import { TopHeader } from '../components/TopHeader';
 import { Plus, Search, SlidersHorizontal } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
-export const ServiceReceiptPage = () => {
+export const ServiceReceiptsPage = () => {
   return (
     <>
       <TopHeader />
