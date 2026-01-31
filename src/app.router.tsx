@@ -1,6 +1,5 @@
 import { createBrowserRouter, Navigate } from 'react-router';
 import { lazy } from 'react';
-import { ServiceReceiptPage } from './receipt/pages/ServiceReceiptPage';
 import {
   AuthenticatedRoute,
   NotAuthenticatedRoute,
