@@ -1,4 +1,5 @@
 import { ChevronRight, Motorbike, UserRoundCog } from 'lucide-react';
+import { Link } from 'react-router';
 
 interface Props {
   id: string;
@@ -80,9 +81,12 @@ export const ServiceReceiptCard = (props: Props) => {
         <span className="text-xs text-slate-400">
           Ingreso: {receptionDate.toLocaleDateString()}
         </span>
-        <button className="flex items-center text-sm font-medium text-primary hover:text-blue-700 dark:hover:text-blue-400">
+        <Link
+          to={`/dashboard/service-receipts/${id}`}
+          className="flex items-center text-sm font-medium text-primary hover:text-blue-700 dark:hover:text-blue-400"
+        >
           Ver Detalles <ChevronRight className="text-[18px] ml-1" />
-        </button>
+        </Link>
       </div>
     </div>
   );

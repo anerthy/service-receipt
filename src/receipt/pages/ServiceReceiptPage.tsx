@@ -2,14 +2,12 @@
 // import { ReceiptStatus } from '../components/ReceiptStatus';
 import { Link } from 'react-router';
 import { ServiceReceiptList } from '../components/ServiceReceiptList';
-import { TopHeader } from '../components/TopHeader';
 import { Plus, Search, SlidersHorizontal } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 
 export const ServiceReceiptPage = () => {
   return (
     <>
-      <TopHeader />
       <div className="px-4 py-3 bg-background-light dark:bg-background-dark z-10">
         <label className="flex flex-col w-full">
           <div className="flex w-full items-center rounded-xl bg-white dark:bg-card-dark shadow-sm border border-slate-200 dark:border-slate-700 overflow-hidden h-12 transition-all focus-within:ring-2 focus-within:ring-primary/50 focus-within:border-primary">

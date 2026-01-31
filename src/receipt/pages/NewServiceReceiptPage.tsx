@@ -13,11 +13,9 @@ import {
   Search,
   User,
   Wrench,
-  X,
 } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router';
 
 const createServiceOrder = async (order: ServiceOrder) => {
   console.log(order);
@@ -72,7 +70,7 @@ export const NewServiceReceiptPage = () => {
     <>
       <div className="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 antialiased overflow-x-hidden transition-colors duration-200">
         {/* <!-- Sticky Header --> */}
-        <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#101822]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
+        {/* <header className="sticky top-0 z-50 bg-white/80 dark:bg-[#101822]/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-center justify-between px-4 py-3 max-w-lg mx-auto w-full">
             <Link to="/">
               <button className="flex items-center justify-center p-2 rounded-full text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors">
@@ -86,7 +84,7 @@ export const NewServiceReceiptPage = () => {
               Guardar
             </button>
           </div>
-        </header>
+        </header> */}
         <form
           onSubmit={handleSubmit(createServiceOrder)}
           className="relative flex flex-col w-full max-w-lg mx-auto pb-24"
